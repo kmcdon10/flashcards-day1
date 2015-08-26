@@ -9,14 +9,18 @@
         <script src="app.js"></script>
     </head>
     <body>
-    	<div ng-app="NoteCards">
-    		<div ng-controller="FlashCardController" class="flash-card">
-    			<h1>{{flashCard.question}}</h1>
-	    		<ul class="flash-card-answers">
-	        		<li ng-repeat="answer in flashCard.answers"class="flash-card-answer">
+    	<div ng-app="NoteCards" ng-controller="MainController" >
+    		<div ng-controller="FlashCardController" class="flash-card" ng-repeat='card in flashCards'>
+    			<h1>{{card.question}}</h1>
+	    		<ul class="flash-card-answers"  ng-show="!answered">
+	        		<li ng-repeat="answer in card.answers" ng-click="flashCard.answerQuestion(answer)" class="flash-card-answer">
 	        			{{answer.text}}
 	        		</li>
 	    		</ul>
+                <h2 class="answer-feedback" ng-show="answered">
+                    <span ng-show="answeredCorrectly">Yeah, you got it right!</span>
+                    <span ng-show="!answeredCorrectly">Nope, you got it wrong.</span>
+                </h2>
 			</div>
     	</div>
     </body>
